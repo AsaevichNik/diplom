@@ -1,6 +1,7 @@
 package org.example;
 import java.util.Random;
 
+
 public class TuringMachineMonteCarlo {
     private static final int MAX_INPUT_LENGTH = 1000;
     private static final int NUM_TESTS = 10000000;
@@ -12,9 +13,9 @@ public class TuringMachineMonteCarlo {
 
         // Добавляем переходы
         turingMachine.addTransition("q0", '0', "q1", '1', TuringMachine.Direction.RIGHT);
-        turingMachine.addTransition("q0", '1', "q0", '0', TuringMachine.Direction.LEFT);
-        turingMachine.addTransition("q1", '0', "q1", '0', TuringMachine.Direction.RIGHT);
-        turingMachine.addTransition("q1", '1', "q0", '1', TuringMachine.Direction.LEFT);
+        turingMachine.addTransition("q1", '1', "halt", '0', TuringMachine.Direction.LEFT);
+        turingMachine.addTransition("halt", '0', "q1", '0', TuringMachine.Direction.RIGHT);
+        turingMachine.addTransition("q0", '1', "halt", '1', TuringMachine.Direction.LEFT);
 
         Random random = new Random();
 
@@ -31,7 +32,8 @@ public class TuringMachineMonteCarlo {
 
             System.out.println("Input: " + input);
             System.out.println("Halted: " + halted);
-            if(halted == false)
+
+            if(!halted)
             {
                 falses++;
             } else
